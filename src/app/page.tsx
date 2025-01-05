@@ -1,4 +1,4 @@
-import Navbar from "@/app/layout/Navbar";
+
 import {ListOfPostCard} from "@/app/components/post/ListOfPostCard";
 
 
