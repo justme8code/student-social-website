@@ -1,0 +1,18 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Outer Coin Circle -->
+    <circle cx="100" cy="100" r="90" fill="#FFD700" stroke="#E5A100" stroke-width="5" />
+
+    <!-- Inner Gradient -->
+    <defs>
+        <linearGradient id="coin_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFF38E" />
+            <stop offset="100%" stop-color="#FFD700" />
+        </linearGradient>
+    </defs>
+    <circle cx="100" cy="100" r="85" fill="url(#coin_grad)" />
+
+    <!-- Letter K -->
+    <text x="100" y="115" text-anchor="middle" alignment-baseline="middle" font-size="90" font-family="Arial" fill="#FFFFFF" font-weight="bold">
+        K
+    </text>
+</svg>
