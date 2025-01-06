@@ -1,6 +1,6 @@
 import {ReusableAvatarComponent} from "@/app/components/ReusableAvatarComponent";
 
-export const AvatarUsernameComponent = ({username,imageUrl}) => {
+export const AvatarUsernameComponent = ({username,imageUrl}:{username:string,imageUrl:string}) => {
     return (
         <>
             <div className="flex items-center gap-3">

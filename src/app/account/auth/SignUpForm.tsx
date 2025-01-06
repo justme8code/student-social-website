@@ -106,7 +106,7 @@ export const SignUpForm = () => {
                 withCredentials: true
             });
 
-            if (status === 200) {
+            if (status === 200 && data !==null) {
                 console.log("Login successful:", data);
                 localStorage.setItem('student-s-logged-in-user', JSON.stringify({ id: data.id}));
                 fetchUser();

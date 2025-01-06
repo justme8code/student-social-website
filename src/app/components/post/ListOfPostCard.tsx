@@ -24,10 +24,14 @@ export const ListOfPostCard = () => {
                         // If there's no previous content, set the new data
                         return request.data;
                     } else {
-                        // Only append posts that haven't been added already
-                        const newPosts = request.data.content.filter((newPost) =>
-                            !prevContent.content.some((existingPost) => existingPost.id === newPost.id)
-                        );
+                        let newPosts:Post[] = [];
+                        if(request.data !==null){
+                            // Only append posts that haven't been added already
+                            newPosts = request.data.content.filter((newPost) =>
+                                !prevContent.content.some((existingPost) => existingPost.id === newPost.id)
+                            );
+                        }
+
 
                         // If there are new posts, append them
                         return {
@@ -48,11 +52,13 @@ export const ListOfPostCard = () => {
     }, [page, fetchData]);
 
     const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-        const bottom = e.target.scrollHeight === e.target.scrollTop + e.target.clientHeight;
+        const target = e.target as HTMLElement; // Cast to HTMLElement
+        const bottom = target.scrollHeight === target.scrollTop + target.clientHeight;
         if (bottom && !loading && hasMore) {
             setPage((prevPage) => prevPage + 1); // Increment page by 1
         }
     };
+
 
     return (
         <div onScroll={handleScroll} >

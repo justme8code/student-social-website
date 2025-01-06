@@ -2,7 +2,7 @@ import { Post } from "@/app/utils/data-types";
 import { AvatarUsernameComponent } from "@/app/components/AvatarUsernameComponent";
 import { PostReactions } from "@/app/components/post/PostReactions";
 import { RESOURCE_URL } from "@/app/utils/api_endpoints";
-import ReactTimeAgo from 'react-timeago';
+import TimeAgo from 'timeago-react'; // var TimeAgo = require('timeago-react');
 import {ImageComponent} from "@/app/components/ImageComponent";
 import {Skeleton} from "@/components/ui/skeleton"; // Import react-timeago
 
@@ -17,9 +17,9 @@ export const PostCard = ({post}:{post:Post}) => {
             <div className="flex flex-col gap-2">
                 <AvatarUsernameComponent
                     username={post.user.username}
-                    imageUrl={post.imageUrl?`${RESOURCE_URL}/images/profile-images/${post.user.profileImageUrl}`: null}
+                    imageUrl={post.imageUrl?`${RESOURCE_URL}/images/profile-images/${post.user.profileImageUrl}`: ""}
                 />
-                <span className="block text-xs text-gray-500">s/Metaphysics • <ReactTimeAgo date={post.createdAt} locale="en-US" /></span>
+                <span className="block text-xs text-gray-500">s/Metaphysics • <TimeAgo datetime={post.createdAt} locale={"en-US"}/></span>
             </div>
 
             {/* Content */}

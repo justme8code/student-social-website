@@ -1,5 +1,5 @@
 import { CustomDialog, CustomDialogProps } from "@/app/components/CustomDialog";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { IconButton } from "@/app/components/buttons/IconButton";
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import useUserStore from "@/app/store/store";
@@ -9,12 +9,12 @@ import {showToast} from "@/hooks/show-toast";
 import {CheckCircle, Edit2Icon, XCircle} from "lucide-react";
 import {ProfileAvatar} from "@/app/components/ProfileAvatar";
 import {changeFile} from "@/app/utils/file-handler";
-import {makePutRequest} from "@/app/utils/requests";
 import {Toaster} from "@/components/ui/toaster";
-import {makeRequest} from "@/app/utils/axios";
+import {Load, makeRequest} from "@/app/utils/axios";
+import {User} from "@/app/config/data_types";
 
 export const SetProfilePictureDialog: React.FC<CustomDialogProps> = ({ open, onClose }) => {
-    const { user, setUser,fetchUser } = useUserStore();
+    const { user, setUser} = useUserStore();
     const [image, setImage] = useState<File | undefined>(undefined);
     const [imagePreview, setImagePreview] = useState<string | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
@@ -34,7 +34,7 @@ export const SetProfilePictureDialog: React.FC<CustomDialogProps> = ({ open, onC
             const formData = new FormData();
             formData.append("profileImage", image);
 
-            const { error, data, status } = await makeRequest(
+            const { error, data, status }:Load<User> = await makeRequest(
                 `${USER_URL}/${user.id}/profile-images`,
                 {
                     method: "PUT",
@@ -45,7 +45,7 @@ export const SetProfilePictureDialog: React.FC<CustomDialogProps> = ({ open, onC
                 }
             );
 
-            if (status === 200) {
+            if (status === 200 && data !==null) {
                 setUser(data);
                 router.replace("/");
             } else {

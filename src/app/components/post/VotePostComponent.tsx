@@ -3,7 +3,7 @@ import {UpVoteButton} from "@/app/components/buttons/UpVoteButton";
 import {DownVoteButton} from "@/app/components/buttons/DownVoteButton";
 import {useEffect, useState} from "react";
 import useUserStore from "@/app/store/store";
-import {makeRequest} from "@/app/utils/axios";
+import {Load, makeRequest} from "@/app/utils/axios";
 import {Post} from "@/app/utils/data-types";
 
 const st = "flex items-center rounded-full ring-1 ring-neutral-200 px-1 dark:ring-neutral-800 justify-center";
@@ -11,7 +11,7 @@ const st = "flex items-center rounded-full ring-1 ring-neutral-200 px-1 dark:rin
 export const VotePostComponent = ({post}:{post:Post}) => {
     const [upvoteCount, setUpvoteCount] = useState<number | null>(null);
     const [downvoteCount, setDownvoteCount] = useState<number | null>(null);
-    const [v,setV] = useState<"UPVOTE" | "DOWNVOTE" | "NOVOTE">("NOVOTE");
+    const [v,setV] = useState<string| null>("NOVOTE");
     const {user} = useUserStore();
 
     useEffect(() => {
@@ -65,12 +65,12 @@ export const VotePostComponent = ({post}:{post:Post}) => {
 
         // Sync with the server
         try {
-            const response = await makeRequest(
+            const response:Load<string> = await makeRequest(
                 `/posts/${post.id}/votes?userId=${user.id}&voteType=${voteType}`,
                 { method: "POST" }
             );
 
-            if (response.status === 200) {
+            if (response.status === 200 && response.data) {
                 // Reconcile optimistic UI updates with server response
                 const currentUserVoteOnPost = response.data;
                 setV(currentUserVoteOnPost);

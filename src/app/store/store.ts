@@ -5,7 +5,7 @@ import { USER_URL } from "@/app/utils/api_endpoints";
 import { User } from "@/app/config/data_types";
 
 interface UserState {
-    user: User|null; // Holds the user object
+    user: User; // Holds the user object
     fetchUser: () => Promise<void>; // Method to fetch user data
     setUser: (user: User) => void; // Method to set user manually
 }
@@ -13,7 +13,7 @@ interface UserState {
 const useUserStore = create<UserState>()(
     persist(
         (set) => ({
-            user:null, // Default state
+            user:{}, // Default state
             fetchUser: async () => {
                 // Retrieve id or username from localStorage
                 const loggedInUser = localStorage.getItem("student-s-logged-in-user");
@@ -27,8 +27,10 @@ const useUserStore = create<UserState>()(
                                     const response:Load<User> = await makeRequest(`${USER_URL}/${id}`, {
                                         method: "GET",
                                     });
-                                    const user = response.data;
-                                    set({ user });
+                                    if(response.data){
+                                        const user = response.data;
+                                        set({ user });
+                                    }
 
 
                                 } catch (error) {

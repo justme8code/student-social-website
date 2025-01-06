@@ -3,15 +3,19 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'http',
-                hostname: 'localhost',
-                port: '8080',
-                pathname: '/student-social/**',
+                protocol: 'https',
+                hostname: 'student-social-api-container.orangemeadow-34849f7a.australiaeast.azurecontainerapps.io',
+                pathname: '/**',
                 search: '',
             },
 
         ],
     },
+
+    eslint:{
+        ignoreDuringBuilds:true
+    },
+
 };
 
 export default nextConfig;

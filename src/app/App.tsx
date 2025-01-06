@@ -7,19 +7,7 @@ import {Navigator} from "@/app/layout/Navigator";
 import {handleLogout} from "@/app/utils/functions";
 
 export const App = ({children}:{children:ReactNode}) => {
-    const {user, fetchUser } = useUserStore();
-    /*const router = useRouter();
 
-    useEffect(() => {
-        // Fetch user data on app load
-        if(!user){
-            handleLogout();
-            router.replace("/account");
-        }else{
-            fetchUser();
-        }
-
-    }, [fetchUser, router, user]);*/
 
     const pathname = usePathname(); // Get the current route path
 

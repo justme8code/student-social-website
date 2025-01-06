@@ -1,7 +1,7 @@
-import { KudosCoin } from "@/app/components/KudosCoin";
+
 import { ProfileAvatar } from "@/app/components/ProfileAvatar";
 import useUserStore from "@/app/store/store";
-import {IMAGE_URL, RESOURCE_URL} from "@/app/utils/api_endpoints";
+import {IMAGE_URL} from "@/app/utils/api_endpoints";
 
 export const AvartarComponent = ({ retention }: { retention: number }) => {
     const { user } = useUserStore();

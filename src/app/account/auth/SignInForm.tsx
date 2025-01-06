@@ -4,7 +4,6 @@ import { z } from "zod"
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
@@ -59,7 +58,7 @@ export const SignInForm= () => {
                 // Remove headers and withCredentials as they're now set in axios instance
             });
 
-            if (status === 200) {
+            if (status === 200 && data !==null) {
                 localStorage.setItem('student-s-logged-in-user', JSON.stringify({ id: data.id }));
                 await fetchUser();
                 router.replace("/");

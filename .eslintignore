@@ -1,0 +1,7 @@
+src/app/**/*
+src/hooks/**/*
+src/app/**/*.ts
+src/app/**/*.tsx
+src/hooks/**/*.ts
+src/hooks/**/*.tsx
+src/app/account/auth/SetProfilePictureDialog.tsx

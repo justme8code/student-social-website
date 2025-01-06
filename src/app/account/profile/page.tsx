@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from "react";
 import { IconButton } from "@/app/components/buttons/IconButton";
-import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
+
 import useUserStore from "@/app/store/store";
 import { BASE_URL, USER_URL } from "@/app/utils/api_endpoints";
 import { useRouter } from "next/navigation";
@@ -9,8 +9,9 @@ import { showToast } from "@/hooks/show-toast";
 import { CheckCircle, Edit2Icon, XCircle } from "lucide-react";
 import { ProfileAvatar } from "@/app/components/ProfileAvatar";
 import { changeFile } from "@/app/utils/file-handler";
-import { makeRequest } from "@/app/utils/axios";
+import {Load, makeRequest} from "@/app/utils/axios";
 import {Navbar2} from "@/app/layout/Navbar2";
+import {User} from "@/app/config/data_types";
 
 export default function SetProfilePage() {
     const { user, setUser } = useUserStore();
@@ -46,7 +47,7 @@ export default function SetProfilePage() {
             const formData = new FormData();
             formData.append("profileImage", image);
 
-            const { error, data, status } = await makeRequest(
+            const { error, data, status }:Load<User> = await makeRequest(
                 `${USER_URL}/${user.id}/profile-images`,
                 {
                     method: "PUT",
@@ -57,7 +58,7 @@ export default function SetProfilePage() {
                 }
             );
 
-            if (status === 200) {
+            if (status === 200 && data !==null) {
                 setUser(data);
                 showToast("Success", "Profile picture updated successfully!");
                 router.replace("/");

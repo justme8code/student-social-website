@@ -1,10 +1,10 @@
 
-import {JSX} from "react";
+import {JSX, ReactNode} from "react";
 import {AppButtonProps} from "@/app/components/buttons/CustomButton";
 
 
 export interface IconButtonProps extends AppButtonProps {
-    icon:JSX.Element;
+    icon:ReactNode;
 }
 export const IconButton:React.FC<IconButtonProps> = ({icon,text,onClick,className,disabled}) => {
     return (
